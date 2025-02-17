@@ -1,0 +1,12 @@
+<div class="mb-10 flex justify-between">
+  <%= link_to "vinovi", main_app.root_path %>
+
+  <% if authenticated? %>
+    <ul class="flex space-x-3">
+      <li><%= Current.user.email_address %></li>
+      <li><%= button_to "Sign out", users.session_path, method: :delete %></li>
+    </ul>
+  <% else %>
+    <%= link_to "Sign in", users.oauth_auth_path %>
+  <% end %>
+</div>
