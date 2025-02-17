@@ -4,6 +4,11 @@ class Tmdb
     JSON.parse(response.body)
   end
 
+  def self.person(id)
+    response = connection.get("person/#{id}")
+    JSON.parse(response.body)
+  end
+
   def self.search(query)
     response = connection.get("search/multi", { query: query })
     JSON.parse(response.body)
