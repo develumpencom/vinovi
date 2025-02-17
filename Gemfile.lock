@@ -396,6 +396,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  faraday (~> 2.12)
   importmap-rails
   kamal
   pg (~> 1.1)
