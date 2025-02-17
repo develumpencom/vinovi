@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :movies, only: [ :show ]
   resource :search, only: [ :show ], controller: :search
+  resources :tv_series, only: [ :show ]
 
   root "search#show"
 end

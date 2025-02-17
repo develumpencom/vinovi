@@ -1,0 +1,35 @@
+<div>
+  <h1 class="text-4xl"><%= @tv["name"] %></h1>
+  <div class="mt-3 flex space-x-3">
+    <div class="grow flex flex-col space-y-3">
+      <%= release_year(@tv["first_air_date"]) %>
+    </div>
+    <% if @tv["poster_path"] %>
+      <%= image_tag("https://image.tmdb.org/t/p/w185#{@tv["poster_path"]}", class: "") %>
+    <% end %>
+  </div>
+  <% if @tv["overview"] %>
+    <div class="mt-5 p-3 rounded-lg bg-gray-50">
+      <%= @tv["overview"] %>
+    </div>
+  <% end %>
+</div>
+
+<% if @tv["seasons"] %>
+  <div class="mt-5">
+    <h2 class="pb-3 text-3xl border-b border-b-black"><%= @tv["number_of_seasons"] %> seasons</h2>
+    <% @tv["seasons"].each do |season| %>
+      <%= render layout: "search/row", locals: {
+        image: season["poster_path"] ? "https://image.tmdb.org/t/p/w185#{season["poster_path"]}" : nil,
+        title: "Season #{season["season_number"]}"
+      } do %>
+          <% if season["air_date"] %>
+            <p class="mt-3">Air date: <%= season["air_date"] %></p>
+          <% end %>
+          <% if season["episode_count"] %>
+            <p class="mt-3"><%= season["episode_count"] %> episodes</p>
+          <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

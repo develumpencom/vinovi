@@ -9,6 +9,11 @@ class Tmdb
     JSON.parse(response.body)
   end
 
+  def self.tv(id)
+    response = connection.get("tv/#{id}")
+    JSON.parse(response.body)
+  end
+
   private
 
   def self.connection
