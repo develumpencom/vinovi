@@ -1,0 +1,5 @@
+<%= render partial: "search/row", locals: {
+  image: media["poster_path"] ? "https://image.tmdb.org/t/p/w185#{media["poster_path"]}" : nil,
+  title: media["name"],
+  icon: :tv
+} %>

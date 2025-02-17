@@ -1,0 +1,10 @@
+<%= form_with(url: search_path, method: :get, class: "flex") do |form| %>
+  <%= form.search_field :query, value: @query, placeholder: "Search for a movie, tv show or person", class: "px-2 py-3 text-2xl grow border border-black" %>
+  <%= form.submit "Search", name: nil, class: "px-2 py-3 text-2xl bg-black text-white border border-black" %>
+<% end %>
+
+<% if Array.wrap(@results["results"]).any? %>
+  <% @results["results"].each do |result| %>
+    <%= render partial: "search/types/#{result["media_type"]}", locals: { media: result } %>
+  <% end %>
+<% end %>

@@ -63,3 +63,5 @@ group :test do
 end
 
 gem "users", "~> 0.1.0", git: "https://github.com/develumpencom/users"
+
+gem "faraday", "~> 2.12"
