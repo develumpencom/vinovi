@@ -1,4 +1,9 @@
 class Tmdb
+  def self.movie(id)
+    response = connection.get("movie/#{id}")
+    JSON.parse(response.body)
+  end
+
   def self.search(query)
     response = connection.get("search/multi", { query: query })
     JSON.parse(response.body)
