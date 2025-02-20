@@ -62,6 +62,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "users", "~> 0.1.0", git: "https://github.com/develumpencom/users"
+gem "users", "~> 0.2.0", git: "https://github.com/develumpencom/users"
 
 gem "faraday", "~> 2.12"
