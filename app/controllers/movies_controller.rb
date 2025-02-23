@@ -1,8 +1,14 @@
 class MoviesController < ApplicationController
-  allow_unauthenticated_access
+  before_action :set_movie, only: [ :show ]
 
   def show
-    @movie = Movie.find_or_create_by(tmdb_id: params[:id]) do |movie|
+    @watched = Current.user.watched.where(media: @movie)
+  end
+
+  private
+
+  def set_movie
+    @movie ||= Movie.find_or_create_by(tmdb_id: params[:id]) do |movie|
       tmdb_movie = Tmdb.movie(params[:id])
 
       movie.imdb_id = tmdb_movie["imdb_id"]
