@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_21_232942) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_21_235511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,5 +44,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_21_232942) do
     t.index ["user_id"], name: "index_users_sessions_on_user_id"
   end
 
+  create_table "watched", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "media_type", null: false
+    t.bigint "media_id", null: false
+    t.datetime "watched_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["media_type", "media_id"], name: "index_watched_on_media"
+    t.index ["user_id"], name: "index_watched_on_user_id"
+  end
+
   add_foreign_key "users_sessions", "users"
+  add_foreign_key "watched", "users"
 end

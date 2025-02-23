@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  resources :movies, only: [ :show ]
+  concern :watchable do
+    resources :watched, shallow: true
+  end
+
+  resources :movies, only: [ :show ], concerns: [ :watchable ]
   resources :people, only: [ :show ]
   resource :search, only: [ :show ], controller: :search
   resources :tv_series, only: [ :show ]
