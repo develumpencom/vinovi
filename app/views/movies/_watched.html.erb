@@ -1,0 +1,14 @@
+<div class="my-10 flex space-x-3">
+  <%= link_to "Add view", new_movie_watched_path(@movie.tmdb_id), class: "px-2 py-1 border border-black hover:bg-gray-100" %>
+</div>
+
+<% if @watched.any? %>
+  <p class="mt-5 pb-5 text-2xl border-b border-b-black">You've watched this movie <%= pluralize(@watched.size, "time") %></p>
+
+  <% @watched.each do |watch| %>
+    <%= render partial: "search/row", locals: {
+      title: watch.watched_at,
+      icon: :chevron
+    } %>
+  <% end %>
+<% end %>
