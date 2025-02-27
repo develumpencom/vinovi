@@ -1,6 +1,6 @@
 class WatchedController < ApplicationController
   before_action :set_media, only: [ :new, :create ]
-  before_action :set_watched, only: [ :show ]
+  before_action :set_watched, only: [ :show, :destroy ]
 
   def show
   end
@@ -18,6 +18,12 @@ class WatchedController < ApplicationController
       flash[:alert] = "Something went wrong"
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @watched.destroy
+
+    redirect_to @watched.media, notice: "You have unwatched this!"
   end
 
   private
