@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :people, only: [ :show ]
   resource :search, only: [ :show ], controller: :search
   resources :tv_series, only: [ :show ]
+  resources :watched, only: [ :index ]
 
   root "search#show"
 end

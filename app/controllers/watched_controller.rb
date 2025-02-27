@@ -1,5 +1,13 @@
 class WatchedController < ApplicationController
   before_action :set_media, only: [ :new, :create ]
+  before_action :set_watched, only: [ :show, :destroy ]
+
+  def index
+    @watched = Current.user.watched.includes(media: [ :movie ]).order(watched_at: :desc)
+  end
+
+  def show
+  end
 
   def new
     @watched = Current.user.watched.new(watched_at: Time.now, media: @media)
@@ -16,12 +24,22 @@ class WatchedController < ApplicationController
     end
   end
 
+  def destroy
+    @watched.destroy
+
+    redirect_to @watched.media, notice: "You have unwatched this!"
+  end
+
   private
 
   def set_media
     if params[:movie_id]
       @media = Movie.find_by(tmdb_id: params[:movie_id])
     end
+  end
+
+  def set_watched
+    @watched ||= Current.user.watched.includes(media: [ :movie ]).find(params[:id])
   end
 
   def watched_params

@@ -1,5 +1,10 @@
-<div class="my-10 flex space-x-3">
-  <%= link_to "Add view", new_movie_watched_path(@movie.tmdb_id), class: "px-2 py-1 border border-black hover:bg-gray-100" %>
+<div class="my-10 flex space-x-3 lg:hidden">
+  <%= link_to new_movie_watched_path(@movie.tmdb_id), class: "flex items-center space-x-1 btn" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>
+    <span>Mark as watched</span>
+  <% end %>
 </div>
 
 <% if @watched.any? %>
@@ -7,7 +12,8 @@
 
   <% @watched.each do |watch| %>
     <%= render partial: "search/row", locals: {
-      title: watch.watched_at,
+      title: watch.watched_at.to_formatted_s(:long_ordinal),
+      url: watched_path(watch),
       icon: :chevron
     } %>
   <% end %>

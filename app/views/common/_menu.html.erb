@@ -3,7 +3,7 @@
 
   <% if authenticated? %>
     <ul class="flex space-x-3">
-      <li><%= Current.user.email_address %></li>
+      <li><%= link_to "Your watches", watched_index_path %></li>
       <li><%= button_to "Sign out", users.session_path, method: :delete %></li>
     </ul>
   <% else %>
