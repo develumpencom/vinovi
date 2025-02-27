@@ -2,6 +2,10 @@ class WatchedController < ApplicationController
   before_action :set_media, only: [ :new, :create ]
   before_action :set_watched, only: [ :show, :destroy ]
 
+  def index
+    @watched = Current.user.watched.includes(media: [ :movie ]).order(watched_at: :desc)
+  end
+
   def show
   end
 

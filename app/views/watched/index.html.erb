@@ -1,0 +1,14 @@
+<h1 class="pb-5 text-4xl border-b border-b-black">You've watched <%= @watched.count %> movies and TV episodes</h1>
+
+<% @watched.each do |watch| %>
+   <%= render layout: "search/row", locals: {
+      image: watch.media.poster_url,
+      title: watch.media.title,
+      url: watched_path(watch),
+      icon: :chevron
+    } do %>
+      <div class="mt-3">
+        <%= release_year(watch.watched_at.to_formatted_s(:long_ordinal)) %>
+      </div>
+    <% end %>
+<% end %>
