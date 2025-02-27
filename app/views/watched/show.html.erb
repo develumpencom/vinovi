@@ -1,0 +1,4 @@
+<div>
+  <h1 class="text-4xl"><%= link_to @watched.media.title, @watched.media %></h1>
+  <p class="my-5">Watched <%= @watched.watched_at.to_formatted_s(:long_ordinal) %></p>
+</div>

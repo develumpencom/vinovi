@@ -8,6 +8,7 @@
   <% @watched.each do |watch| %>
     <%= render partial: "search/row", locals: {
       title: watch.watched_at,
+      url: watched_path(watch),
       icon: :chevron
     } %>
   <% end %>
