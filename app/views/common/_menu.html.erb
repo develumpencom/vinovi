@@ -4,6 +4,7 @@
   <% if authenticated? %>
     <ul class="flex space-x-3">
       <li><%= link_to "Your watches", watched_index_path %></li>
+      <li><%= link_to "Lists", lists_path %></li>
       <li><%= button_to "Sign out", users.session_path, method: :delete %></li>
     </ul>
   <% else %>
