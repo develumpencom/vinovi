@@ -10,10 +10,14 @@
   <% end %>
 </div>
 
+<% if !@lists.any? %>
+  <p class="mt-5">You don't have any list yet. <%= link_to "Add one now", new_list_path %>.</p>
+<% end %>
+
 <% @lists.each do |list| %>
   <%= render partial: "search/row", locals: {
     title: list.name,
-    # url: list_path(list),
+    url: list_path(list),
     icon: :chevron
   } %>
 <% end %>
