@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :watched, shallow: true
   end
 
-  resources :lists, only: [ :index, :new, :create ]
+  resources :lists, only: [ :index, :new, :show, :create, :destroy ]
   resources :movies, only: [ :show ], concerns: [ :watchable ]
   resources :people, only: [ :show ]
   resource :search, only: [ :show ], controller: :search
