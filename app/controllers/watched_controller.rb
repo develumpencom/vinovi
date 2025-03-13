@@ -1,6 +1,6 @@
 class WatchedController < ApplicationController
   before_action :set_media, only: [ :new, :create ]
-  before_action :set_watched, only: [ :show, :destroy ]
+  before_action :set_watched, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @watched = Current.user.watched.includes(media: [ :movie ]).order(watched_at: :desc)
@@ -13,6 +13,9 @@ class WatchedController < ApplicationController
     @watched = Current.user.watched.new(watched_at: Time.now, media: @media)
   end
 
+  def edit
+  end
+
   def create
     @watched = Current.user.watched.new(watched_params.merge(media: @media))
 
@@ -21,6 +24,14 @@ class WatchedController < ApplicationController
     else
       flash[:alert] = "Something went wrong"
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @watched.update(watched_params)
+      redirect_to @watched, notice: "Watched was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

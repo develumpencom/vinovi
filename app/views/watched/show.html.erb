@@ -3,6 +3,7 @@
   <p class="my-5">Watched <%= @watched.watched_at.to_formatted_s(:long_ordinal) %></p>
 </div>
 
-<div class="mt-10">
-  <%= button_to "Delete watched", watched_path(@watched), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn" %>
+<div class="mt-10 flex space-x-3">
+  <%= link_to "Edit", edit_watched_path(@watched), class: "btn" %>
+  <%= button_to "Delete", watched_path(@watched), method: :delete, data: { turbo_confirm: "Are you sure?" }, form_class: "inline", class: "btn" %>
 </div>

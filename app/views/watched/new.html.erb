@@ -1,6 +1,3 @@
 <h1 class="text-4xl"><%= link_to @media.title, @media %></h1>
 
-<%= form_with(model: @watched, url: polymorphic_path([@media, :watched, :index]), class: "mt-5") do |form| %>
-  <%= form.datetime_field :watched_at, class: "block my-5 border border-black" %>
-  <%= form.submit "Mark as watched", class: "btn" %>
-<% end %>
+<%= render "form", model: @watched, url: polymorphic_path([@media, :watched, :index]), cta: "Mark as watched" %>
