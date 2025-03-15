@@ -1,0 +1,11 @@
+<div class="mt-5">
+  <h2 class="pb-3 text-3xl border-b border-b-black"><%= link_to @tv["name"], tv_series_path(@tv["id"]) %> - <%= @tv_season["name"] %></h2>
+  <% @tv_season["episodes"].each do |episode| %>
+    <%= render layout: "search/row", locals: {
+      image: episode["still_path"] ? "https://image.tmdb.org/t/p/w185#{episode["still_path"]}" : nil,
+      title: episode["episode_number"].to_s + " " + episode["name"],
+    } do %>
+      <%= episode["air_date"] %>
+    <% end %>
+  <% end %>
+</div>
