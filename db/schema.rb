@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_28_015942) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_16_170044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,43 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_28_015942) do
     t.integer "runtime"
     t.string "poster_path"
     t.string "overview"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tv_episodes", force: :cascade do |t|
+    t.string "tmdb_id", null: false
+    t.bigint "tv_serie_id", null: false
+    t.bigint "tv_season_id", null: false
+    t.string "name"
+    t.string "still_path"
+    t.integer "episode_number"
+    t.string "air_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tv_season_id"], name: "index_tv_episodes_on_tv_season_id"
+    t.index ["tv_serie_id"], name: "index_tv_episodes_on_tv_serie_id"
+  end
+
+  create_table "tv_seasons", force: :cascade do |t|
+    t.string "tmdb_id", null: false
+    t.bigint "tv_serie_id", null: false
+    t.string "poster_path"
+    t.integer "season_number"
+    t.string "air_date"
+    t.integer "episode_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tv_serie_id"], name: "index_tv_seasons_on_tv_serie_id"
+  end
+
+  create_table "tv_series", force: :cascade do |t|
+    t.string "tmdb_id", null: false
+    t.string "name", null: false
+    t.text "overview"
+    t.string "poster_path"
+    t.string "first_air_date"
+    t.integer "number_of_seasons", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,6 +101,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_28_015942) do
   end
 
   add_foreign_key "lists", "users"
+  add_foreign_key "tv_episodes", "tv_seasons"
+  add_foreign_key "tv_episodes", "tv_series", column: "tv_serie_id"
+  add_foreign_key "tv_seasons", "tv_series", column: "tv_serie_id"
   add_foreign_key "users_sessions", "users"
   add_foreign_key "watched", "users"
 end
