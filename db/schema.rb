@@ -49,8 +49,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_16_170044) do
   end
 
   create_table "tv_seasons", force: :cascade do |t|
-    t.string "tmdb_id", null: false
     t.bigint "tv_serie_id", null: false
+    t.string "tmdb_id", null: false
+    t.string "name"
+    t.text "overview"
     t.string "poster_path"
     t.integer "season_number"
     t.string "air_date"

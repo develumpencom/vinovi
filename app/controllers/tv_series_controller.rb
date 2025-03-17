@@ -9,6 +9,6 @@ class TvSeriesController < ApplicationController
   private
 
   def set_tv_serie
-    @tv_serie = TvSerie.find_by(tmdb_id: params[:id]) || TvSerie.cache(tmdb_id: params[:id])
+    @tv_serie = TvSerie.find_or_cache_by_tmdb_id(tmdb_id: params[:id])
   end
 end
